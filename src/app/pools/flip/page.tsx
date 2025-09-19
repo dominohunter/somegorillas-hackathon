@@ -15,14 +15,14 @@ export default function Games() {
   const contractAddress = "0xCb34fC63d33152aA874785507Cb11A6bDE17fC49"
   const { address } = useAccount();
   const { data: balance, status: balanceStatus, refetch: balanceRefetch } = useBalance({ address: address })
-  const { writeContract, status: writeStatus, error } = useWriteContract()
+  const { writeContract, status: writeStatus } = useWriteContract()
   const { data: tokenBalance, status: tokenBalanceStatus, refetch: tokenBalanceRefetch } = useReadContract({
     abi: GamePoolInvestmentAbi,
     address: contractAddress,
     functionName: 'balanceOf',
     args: [address ?? "0xB2A3c4b0253cD39717ad72B636631D018917B670"],
   })
-  const { data: contractBalance, status: contractBalanceStatus, refetch: contractBalanceRefetch } = useReadContract({
+  const { data: contractBalance, refetch: contractBalanceRefetch } = useReadContract({
     abi: GamePoolInvestmentAbi,
     address: contractAddress,
     functionName: 'balance',
@@ -39,25 +39,25 @@ export default function Games() {
   }, [writeStatus])
 
   function handleInvest() {
-    if(Number(investInput) == 0) return;
+    if (Number(investInput) == 0) return;
 
     writeContract({
       abi: GamePoolInvestmentAbi,
       address: contractAddress,
       functionName: 'invest',
       args: [],
-      value: parseEther(investInput),
+      value: parseEther(investInput.toString()),
     })
   }
 
   function handleWithdraw() {
-    if(Number(withdrawInput) == 0) return;
+    if (Number(withdrawInput) == 0) return;
 
     writeContract({
       abi: GamePoolInvestmentAbi,
       address: contractAddress,
       functionName: 'withdraw',
-      args: [parseEther(withdrawInput)],
+      args: [parseEther(withdrawInput.toString())],
     })
   }
 
@@ -75,7 +75,7 @@ export default function Games() {
                 Investment Pool
               </p>
               <p className="text-light-primary text-h5 text-4xl font-body-2 font-[600]">
-                {formatEther(contractBalance) ?? 0} STT
+                {formatEther(contractBalance ?? 0)} STT
               </p>
             </div>
           </div>
@@ -114,11 +114,11 @@ export default function Games() {
               <div className="py-5 flex flex-col items-center gap-y-3 rounded-2xl border-2 border-translucent-light-4 bg-translucent-light-12">
                 <label className="font-bold text-white text-xl">Invest STT Amount</label>
                 <input type="number" value={investInput} onChange={(e) => {
-                  if(!balance) return;
+                  if (!balance) return;
 
-                  let value = e.target.value
+                  const value = e.target.value
 
-                  setInvestInput(value) 
+                  setInvestInput(Number(value))
                 }} className="text-white text-2xl w-8/12 border-2 rounded-full text-center p-2" />
                 {writeStatus == "pending" ? (
                   <p className="text-white">Loading</p>
@@ -145,12 +145,12 @@ export default function Games() {
               <div className="py-5 flex flex-col items-center gap-y-3 rounded-2xl border-2 border-translucent-light-4 bg-translucent-light-12">
                 <label className="font-bold text-white text-xl">Withdraw STT Amount</label>
                 <input type="number" value={withdrawInput} onChange={(e) => {
-                  if(!tokenBalance) return;
+                  if (!tokenBalance) return;
 
-                  let value = e.target.value
-                  if(value == "") return;
+                  const value = e.target.value
+                  if (value == "") return;
 
-                  setWithdrawInput(value)
+                  setWithdrawInput(Number(value))
                 }} className="text-white text-2xl w-8/12 border-2 rounded-full text-center p-2" />
                 {writeStatus == "pending" ? (
                   <p className="text-white">Loading</p>

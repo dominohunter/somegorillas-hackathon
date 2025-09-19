@@ -26,7 +26,7 @@ import Butt from "@/components/icons/butt";
 import Head from "@/components/icons/head";
 import AddFriend from "@/components/icons/add-friend";
 import { toast } from "sonner";
-import Discord from "@/components/icons/discord";
+// import Discord from "@/components/icons/discord";
 
 export default function Profile() {
   const {
