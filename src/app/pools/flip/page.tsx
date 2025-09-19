@@ -113,7 +113,7 @@ export default function Games() {
             {balanceStatus == "success" && (
               <div className="py-5 flex flex-col items-center gap-y-3 rounded-2xl border-2 border-translucent-light-4 bg-translucent-light-12">
                 <label className="font-bold text-white text-xl">Invest STT Amount</label>
-                <input type="number" value={investInput} onChange={(e) => {
+                <input min="0" type="number" value={investInput} onChange={(e) => {
                   if (!balance) return;
 
                   const value = e.target.value
@@ -144,7 +144,7 @@ export default function Games() {
             {balanceStatus == "success" && (
               <div className="py-5 flex flex-col items-center gap-y-3 rounded-2xl border-2 border-translucent-light-4 bg-translucent-light-12">
                 <label className="font-bold text-white text-xl">Withdraw STT Amount</label>
-                <input type="number" value={withdrawInput} onChange={(e) => {
+                <input min="0" type="number" value={withdrawInput} onChange={(e) => {
                   if (!tokenBalance) return;
 
                   const value = e.target.value
