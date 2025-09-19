@@ -172,7 +172,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     router.push("/");
   }, [queryClient, disconnect, router]);
 
-  const isDiscordVerified = discordStatus?.verified ?? false;
+  // const isDiscordVerified = discordStatus?.verified ?? false;
+  const isDiscordVerified = true;
   const isAuthenticated = !!token && !!userQuery.data;
   const isFullyAuthenticated = isAuthenticated && isDiscordVerified;
 

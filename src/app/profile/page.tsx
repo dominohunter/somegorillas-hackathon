@@ -129,24 +129,24 @@ export default function Profile() {
   //todo: discord verified gdgiig haruulahda odoo zger l haruulj bga. Evteihneer verified ntr gsn yum haruulah heregtei bga. Ugaasa bugd metamask r orj irehdee discord holbotson orj ireh bolhor
 
   const socialAchievements = [
-    {
-      id: "discord_connect",
-      title: "Discord ",
-      description: "Connect your Discord account",
-      icon: <Discord size={24} />,
-      platform: "discord",
-      xpReward: 50,
-      completed: isDiscordVerified,
-    },
-    {
-      id: "discord_join",
-      title: "Join our Discord server",
-      description: "Join the Gorillaz community Discord",
-      icon: <Discord size={24} />,
-      platform: "discord",
-      xpReward: 25,
-      completed: false, // This would need backend tracking
-    },
+    // {
+    //   id: "discord_connect",
+    //   title: "Discord ",
+    //   description: "Connect your Discord account",
+    //   icon: <Discord size={24} />,
+    //   platform: "discord",
+    //   xpReward: 50,
+    //   completed: isDiscordVerified,
+    // },
+    // {
+    //   id: "discord_join",
+    //   title: "Join our Discord server",
+    //   description: "Join the Gorillaz community Discord",
+    //   icon: <Discord size={24} />,
+    //   platform: "discord",
+    //   xpReward: 25,
+    //   completed: false, // This would need backend tracking
+    // },
     {
       id: "twitter_follow",
       title: "Follow on Twitter",
@@ -186,8 +186,8 @@ export default function Profile() {
     }
     return user.totalFlips > 0
       ? (((user.totalHeads + user.totalTails) / user.totalFlips) * 100).toFixed(
-          1,
-        )
+        1,
+      )
       : "0";
   };
 
@@ -287,11 +287,10 @@ export default function Profile() {
                 key={tab.id}
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex-1 p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center justify-center gap-1 sm:gap-2 ${
-                  activeTab === tab.id
-                    ? "bg-white/20 text-white"
-                    : "text-translucent-light-64 hover:text-white hover:bg-white/10"
-                }`}
+                className={`flex-1 p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center justify-center gap-1 sm:gap-2 ${activeTab === tab.id
+                  ? "bg-white/20 text-white"
+                  : "text-translucent-light-64 hover:text-white hover:bg-white/10"
+                  }`}
               >
                 <span className="flex-shrink-0">{tab.icon}</span>
                 <span className="hidden xs:inline sm:inline">{tab.label}</span>
@@ -329,7 +328,7 @@ export default function Profile() {
                   <div className="text-lg sm:text-2xl font-bold text-light-primary">
                     {flipsHistoryQuery.data
                       ? flipsHistoryQuery.data.filter((flip) => flip.isWin)
-                          .length
+                        .length
                       : user.totalHeads + user.totalTails}
                   </div>
                 </div>
@@ -345,11 +344,11 @@ export default function Profile() {
                   <div className="text-lg sm:text-2xl font-bold text-light-primary">
                     {flipsHistoryQuery.data
                       ? flipsHistoryQuery.data.filter((flip) => !flip.isWin)
-                          .length
+                        .length
                       : Math.max(
-                          0,
-                          user.totalFlips - (user.totalHeads + user.totalTails),
-                        )}
+                        0,
+                        user.totalFlips - (user.totalHeads + user.totalTails),
+                      )}
                   </div>
                 </div>
               </div>

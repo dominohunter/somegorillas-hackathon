@@ -142,6 +142,18 @@ export default function Header() {
             <>
               <CartoonButton
                 size={"md"}
+                variant={pathname.startsWith("/pools") ? "secondary" : "primary"}
+                onClick={() => {
+                  if (pathname.startsWith("/pools")) return
+                  router.push("/pools")
+                }}
+              >
+                <p className="text-dark-primary">
+                  Pools
+                </p>
+              </CartoonButton>
+              <CartoonButton
+                size={"md"}
                 variant={
                   pathname.startsWith("/games") ? "secondary" : "primary"
                 }
@@ -185,9 +197,8 @@ export default function Header() {
                       height="12"
                       viewBox="0 0 12 12"
                       fill="none"
-                      className={`transition-transform ${
-                        isDropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`transition-transform ${isDropdownOpen ? "rotate-180" : ""
+                        }`}
                     >
                       <path
                         d="M3 4.5L6 7.5L9 4.5"
